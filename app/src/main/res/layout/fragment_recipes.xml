@@ -33,6 +33,16 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -53,11 +63,9 @@
         android:alpha="0.5"
         android:src="@drawable/ic_sad"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recyclerview"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
 
     <TextView
         android:id="@+id/error_textView"
