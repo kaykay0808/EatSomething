@@ -1,13 +1,13 @@
-package com.kay.eatsomething
+package com.kay.eatsomething.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.kay.eatsomething.R
 import com.kay.eatsomething.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

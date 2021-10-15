@@ -1,4 +1,4 @@
-package com.kay.eatsomething
+package com.kay.eatsomething.ui.fragments.recipes
 
 import android.os.Bundle
 import android.view.LayoutInflater
