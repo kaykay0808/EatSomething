@@ -33,3 +33,5 @@ class RecipesFragment : Fragment() {
         _binding = null
     }
 }
+
+// Note to myself: RecipesFragment -> MainViewModel -> Repository -> (Local Data Source/Remote Data Source)
