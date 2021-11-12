@@ -1,4 +1,4 @@
-package com.kay.eatsomething
+package com.kay.eatsomething.util
 
 class Constants {
 

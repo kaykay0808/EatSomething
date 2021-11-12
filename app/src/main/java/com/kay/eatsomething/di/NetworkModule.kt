@@ -1,7 +1,7 @@
 package com.kay.eatsomething.di
 
-import com.kay.eatsomething.Constants.Companion.BASE_URL
-import com.kay.eatsomething.FoodRecipesApi
+import com.kay.eatsomething.util.Constants.Companion.BASE_URL
+import com.kay.eatsomething.data.network.FoodRecipesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

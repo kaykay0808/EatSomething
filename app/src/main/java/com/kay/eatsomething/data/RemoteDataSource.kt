@@ -1,5 +1,6 @@
-package com.kay.eatsomething
+package com.kay.eatsomething.data
 
+import com.kay.eatsomething.data.network.FoodRecipesApi
 import com.kay.eatsomething.models.FoodRecipe
 import retrofit2.Response
 import javax.inject.Inject

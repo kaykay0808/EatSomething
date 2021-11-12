@@ -1,4 +1,4 @@
-package com.kay.eatsomething
+package com.kay.eatsomething.data.network
 
 import com.kay.eatsomething.models.FoodRecipe
 import retrofit2.Response
