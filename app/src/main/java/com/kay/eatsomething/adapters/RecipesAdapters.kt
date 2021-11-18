@@ -11,12 +11,10 @@ import com.kay.eatsomething.util.RecipesDiffUtil
 
 class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
 
-    private var recipe = emptyList<FoodTypeResult>()
+    private var recipes = emptyList<FoodTypeResult>()
 
-    class MyViewHolder(val binding: RecipesRowLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: RecipesRowLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        // databinding or viewbinding?
 
     }
 
@@ -33,17 +31,17 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentResult = recipe[position] // <- we might need to change this later.
+        val currentRecipe = recipes[position] // <- we might need to change this later.
     }
 
     override fun getItemCount(): Int {
-        return recipe.size
+        return recipes.size
     }
 
     fun setData(newData: FoodRecipe){
-        val recipesDiffUtil = RecipesDiffUtil(recipe, newData.foodTypeResults) // <- the old list is recipe and the new list is newData.
+        val recipesDiffUtil = RecipesDiffUtil(recipes, newData.foodTypeResults) // <- the old list is recipe and the new list is newData.
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil) // <- This calculate the difference between those two list.
-        recipe = newData.foodTypeResults
+        recipes = newData.foodTypeResults
         diffUtilResult.dispatchUpdatesTo(this) // refer to this class (RecyclerView adapter)
 
     }

@@ -1,6 +1,6 @@
 package com.kay.eatsomething.data
 
-import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 // OPPBEVARING av data.
@@ -9,7 +9,7 @@ import javax.inject.Inject
 // (1) inject RemoteDataSource inside our repository.
 // (1.1) everything inside the constructor will come from the dependency graph
 
-@ActivityRetainedScoped
+@ViewModelScoped
 class Repository @Inject constructor(
     remoteDataSource: RemoteDataSource
 ){
