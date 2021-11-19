@@ -20,7 +20,7 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesAdapters.MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return RecipesAdapters.MyViewHolder(

@@ -51,8 +51,8 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API key Limited.")
             }
-            response.body()!!.foodTypeResults.isNotEmpty() -> {
-                return NetworkResult.Error("Recipes Not Found")
+            response.body()!!.foodTypeResults.isNullOrEmpty() -> {
+                return NetworkResult.Error("Recipes not found")
             }
             response.isSuccessful -> {
                 val foodRecipes = response.body()
