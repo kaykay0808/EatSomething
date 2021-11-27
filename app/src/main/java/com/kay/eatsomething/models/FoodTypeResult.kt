@@ -2,8 +2,8 @@ package com.kay.eatsomething.models
 
 
 import com.google.gson.annotations.SerializedName
-import com.kay.eatsomething.models.ExtendedIngredient
 
+// The value we get from the Api
 data class FoodTypeResult(
     @SerializedName("aggregateLikes")
     val aggregateLikes: Int,

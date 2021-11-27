@@ -1,4 +1,4 @@
-package com.kay.eatsomething
+package com.kay.eatsomething.viewmodels
 
 import android.app.Application
 import android.content.Context

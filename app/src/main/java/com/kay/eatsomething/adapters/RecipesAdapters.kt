@@ -2,9 +2,12 @@ package com.kay.eatsomething.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.kay.eatsomething.R
 import com.kay.eatsomething.databinding.RecipesRowLayoutBinding
 import com.kay.eatsomething.models.FoodRecipe
 import com.kay.eatsomething.models.FoodTypeResult
@@ -20,7 +23,10 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesAdapters.MyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RecipesAdapters.MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return RecipesAdapters.MyViewHolder(
@@ -34,6 +40,7 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentRecipe = recipes[position] // <- we might need to change this later.
+        val color = holder.binding.leafImageView.context.getColor(R.color.green)
         // load image from URL
         holder.binding.recipeImageView.load(currentRecipe.image) { crossfade(600) }
         // set number of likes(<3)
@@ -41,9 +48,15 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
         // set number of minutes
         holder.binding.clockTextView.text = currentRecipe.readyInMinutes.toString()
         // vegan image?
-        holder.binding.leafImageView
+        holder.binding.leafImageView.colorFilter =
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                color,
+                BlendModeCompat.SRC_ATOP
+            )
         // heart image?
         holder.binding.heartImageView
+        // set title
+        holder.binding.titleTextView.text = currentRecipe.title
     }
 
     override fun getItemCount(): Int {
@@ -61,4 +74,5 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
         diffUtilResult.dispatchUpdatesTo(this) // refer to this class (RecyclerView adapter)
 
     }
+
 }

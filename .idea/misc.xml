@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kaysh/Desktop/Android projects/EatSomething/app/src/main/res/drawable/ic_leaf.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/Kaysh/Desktop/Android projects/EatSomething/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Kaysh/Desktop/Android projects/EatSomething/app/src/main/res/layout/fragment_favorite_recipes.xml" value="0.42527173913043476" />
         <entry key="..\:/Users/Kaysh/Desktop/Android projects/EatSomething/app/src/main/res/layout/fragment_food_joke.xml" value="0.42527173913043476" />
