@@ -42,7 +42,11 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
         val currentRecipe = recipes[position] // <- we might need to change this later.
         val color = holder.binding.leafImageView.context.getColor(R.color.green)
         // load image from URL
-        holder.binding.recipeImageView.load(currentRecipe.image) { crossfade(600) }
+        holder.binding.recipeImageView.load(currentRecipe.image) {
+            crossfade(600)
+            error(R.drawable.ic_error_placeholder) //<- If no connection an error picture will load instead.
+        }
+
         // set number of likes(<3)
         holder.binding.heartTextView.text = currentRecipe.aggregateLikes.toString()
         // set number of minutes
