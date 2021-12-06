@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,7 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kay.eatsomething.viewmodels.MainViewModel
 import com.kay.eatsomething.adapters.RecipesAdapters
+import com.kay.eatsomething.database.RecipesEntity
 import com.kay.eatsomething.databinding.FragmentRecipesBinding
+import com.kay.eatsomething.models.FoodRecipe
 import com.kay.eatsomething.util.NetworkResult
 import com.kay.eatsomething.util.observeOnce
 import com.kay.eatsomething.viewmodels.RecipesViewModel
@@ -29,11 +33,7 @@ class RecipesFragment : Fragment() {
     private val mainViewModel: MainViewModel by viewModels()
     private val recipesViewModel: RecipesViewModel by viewModels()
     private val mAdapter by lazy { RecipesAdapters() }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,13 +43,13 @@ class RecipesFragment : Fragment() {
 
         //mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-
         setupRecyclerView()
-        showShimmerEffect()
         readDatabase()
 
         return binding.root
     }
+
+    // should create onViewCreated here instead?
 
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = mAdapter
@@ -103,6 +103,36 @@ class RecipesFragment : Fragment() {
                     mAdapter.setData(database[0].foodRecipe)
                 }
             }
+        }
+    }
+
+    // testing
+    fun errorImageViewVisibility(
+        imageView: ImageView,
+        apiResponse: NetworkResult<FoodRecipe>?,
+        database: List<RecipesEntity>?
+    ) {
+        if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
+            imageView.visibility = View.VISIBLE
+        } else if (apiResponse is NetworkResult.Loading) {
+            imageView.visibility = View.INVISIBLE
+        } else if (apiResponse is NetworkResult.Success) {
+            imageView.visibility = View.INVISIBLE
+        }
+    }
+
+    fun errorTextViewVisibility(
+        textView: TextView,
+        apiResponse: NetworkResult<FoodRecipe>?,
+        database: List<RecipesEntity>?
+    ) {
+        if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
+            textView.visibility = View.VISIBLE
+            textView.text = apiResponse.message.toString()
+        } else if (apiResponse is NetworkResult.Loading) {
+            textView.visibility = View.INVISIBLE
+        } else if (apiResponse is NetworkResult.Success) {
+            textView.visibility = View.INVISIBLE
         }
     }
 
