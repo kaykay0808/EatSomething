@@ -39,6 +39,7 @@ class MainViewModel @Inject constructor(
     /** RETROFIT */
     //Create some mutable livedata.
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
+    var errorLiveData = MutableLiveData<String?>()
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
         getRecipesSafeCall(queries)

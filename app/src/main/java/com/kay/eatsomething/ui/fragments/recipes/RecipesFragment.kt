@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +34,7 @@ class RecipesFragment : Fragment() {
     private val mainViewModel: MainViewModel by viewModels()
     private val recipesViewModel: RecipesViewModel by viewModels()
     private val mAdapter by lazy { RecipesAdapters() }
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,13 +44,18 @@ class RecipesFragment : Fragment() {
 
         //mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-        setupRecyclerView()
-        readDatabase()
-
         return binding.root
     }
 
-    // should create onViewCreated here instead?
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        setupRecyclerView()
+
+        // observe livedata
+
+
+        readDatabase()
+    }
 
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = mAdapter
@@ -93,6 +99,7 @@ class RecipesFragment : Fragment() {
                     showShimmerEffect()
                 }
             }
+            handleErrorView(response)
         })
     }
 
@@ -106,37 +113,19 @@ class RecipesFragment : Fragment() {
         }
     }
 
+
     // testing
-    fun errorImageViewVisibility(
-        imageView: ImageView,
-        apiResponse: NetworkResult<FoodRecipe>?,
-        database: List<RecipesEntity>?
-    ) {
-        if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
-            imageView.visibility = View.VISIBLE
-        } else if (apiResponse is NetworkResult.Loading) {
-            imageView.visibility = View.INVISIBLE
-        } else if (apiResponse is NetworkResult.Success) {
-            imageView.visibility = View.INVISIBLE
+
+    private fun handleErrorView(response: NetworkResult<FoodRecipe>) {
+        if (response is NetworkResult.Error && mainViewModel.readRecipes.value.isNullOrEmpty()) {
+            binding.errorImageView.visibility = View.VISIBLE
+            binding.errorTextView.visibility = View.VISIBLE
+            binding.errorTextView.text = response.message
+        } else {
+            binding.errorImageView.visibility = View.INVISIBLE
+            binding.errorTextView.visibility = View.INVISIBLE
         }
     }
-
-    fun errorTextViewVisibility(
-        textView: TextView,
-        apiResponse: NetworkResult<FoodRecipe>?,
-        database: List<RecipesEntity>?
-    ) {
-        if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
-            textView.visibility = View.VISIBLE
-            textView.text = apiResponse.message.toString()
-        } else if (apiResponse is NetworkResult.Loading) {
-            textView.visibility = View.INVISIBLE
-        } else if (apiResponse is NetworkResult.Success) {
-            textView.visibility = View.INVISIBLE
-        }
-    }
-
-
 
     private fun showShimmerEffect() {
         binding.shimmerFrameLayout.startShimmer()
