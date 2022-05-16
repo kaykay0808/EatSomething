@@ -1,0 +1,36 @@
+App Overview.
+<------------------------------------------------------------------------>
+Functionality:
+-> App provide Meal type filter such as Main Course, Side dish and dessert
+-> App provide Diet Type filter such as Ketotogenic, vegetarian vegan
+
+-> every recipes shows the number of likes, time to cook, and a vegan symbol
+-> App saves favorite recipes in a favorite section.
+-> app can share recipes
+-> app have dark theme and light theme
+
+Task
+----------------------------------------------------------------------------
+Gradle Task
+Dagger-Hilt
+Safe-args
+kotlin-Kapt
+
+(1) setup Spoonacular API
+
+(2) Setup Navigation component.
+    -> from resource manager click: Navigation tab-> add resources to module(the + symbol) call the file "my_nav"
+    -> Create 3 destinations (recipesFragment, favoriteRecipesFragment, foodJokeFragment)
+    -> add navHostFragment in Activity XML
+    -> add bottom navigation view to activity xml
+    -> change the root to all fragment xml to Constraint layout
+    -> Create a new menu resource file from the resource manager and call it bottom_nav_menu
+    -> link the items from the bottom navigation view inside activity XML
+    -> add light grey color to our Activity background root and the fragments root elements.
+
+(3) Design Recipes Fragment
+(4) Design recipes row layout and recyclerView Placeholder Layout. (shimmering effect)
+
+
+(5) convert the jSon end point
+https://api.spoonacular.com/recipes/complexSearch?number=50&apiKey=[YOUR-API-KEY]&type=snack&diet=vegan&addRecipeInformation=true&fillIngredients=true

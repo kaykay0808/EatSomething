@@ -13,7 +13,7 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     remoteDataSource: RemoteDataSource,
     localDataSource: LocalDataSource
-){
+) {
 
     // store the remoteDataSource, and localDatasource in those variable.
     val remote = remoteDataSource

@@ -1,6 +1,5 @@
 package com.kay.eatsomething.models
 
-
 import com.google.gson.annotations.SerializedName
 
 data class ExtendedIngredient(

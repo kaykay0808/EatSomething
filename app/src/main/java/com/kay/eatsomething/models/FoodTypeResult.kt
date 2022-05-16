@@ -1,6 +1,5 @@
 package com.kay.eatsomething.models
 
-
 import com.google.gson.annotations.SerializedName
 
 // The value we get from the Api

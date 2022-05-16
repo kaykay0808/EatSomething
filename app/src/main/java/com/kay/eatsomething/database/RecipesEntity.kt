@@ -8,7 +8,7 @@ import com.kay.eatsomething.util.Constants.Companion.RECIPES_TABLE
 //
 
 @Entity(tableName = RECIPES_TABLE)
-class RecipesEntity (
+class RecipesEntity(
     var foodRecipe: FoodRecipe
 ) {
     @PrimaryKey(autoGenerate = false) // <- fetch the newest data to our database

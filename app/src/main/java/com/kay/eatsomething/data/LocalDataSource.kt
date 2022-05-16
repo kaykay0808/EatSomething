@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val recipesDao: RecipesDao
-){
+) {
     fun readDatabase(): Flow<List<RecipesEntity>> {
         return recipesDao.readRecipes()
     }

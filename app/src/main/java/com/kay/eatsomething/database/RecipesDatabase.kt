@@ -12,8 +12,7 @@ import androidx.room.TypeConverters
     exportSchema = false
 )
 @TypeConverters(RecipesTypeConverter::class) // <-- this is for our converter.
-abstract class RecipesDatabase: RoomDatabase() {
+abstract class RecipesDatabase : RoomDatabase() {
 
     abstract fun recipesDao(): RecipesDao
-
 }

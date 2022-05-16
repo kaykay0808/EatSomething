@@ -5,21 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kay.eatsomething.viewmodels.MainViewModel
 import com.kay.eatsomething.adapters.RecipesAdapters
-import com.kay.eatsomething.database.RecipesEntity
 import com.kay.eatsomething.databinding.FragmentRecipesBinding
 import com.kay.eatsomething.models.FoodRecipe
 import com.kay.eatsomething.util.NetworkResult
 import com.kay.eatsomething.util.observeOnce
+import com.kay.eatsomething.viewmodels.MainViewModel
 import com.kay.eatsomething.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,19 +26,20 @@ class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
 
-    //private lateinit var mainViewModel: MainViewModel
+    // private lateinit var mainViewModel: MainViewModel
     private val mainViewModel: MainViewModel by viewModels()
     private val recipesViewModel: RecipesViewModel by viewModels()
     private val mAdapter by lazy { RecipesAdapters() }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
-        //mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        // mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         return binding.root
     }
@@ -52,7 +49,6 @@ class RecipesFragment : Fragment() {
         setupRecyclerView()
 
         // observe livedata
-
 
         readDatabase()
     }
@@ -65,23 +61,27 @@ class RecipesFragment : Fragment() {
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
-                if(database.isNotEmpty()){
-                    Log.d("RecipesFragment","readDatabase called")
+            mainViewModel.readRecipes.observeOnce(
+                viewLifecycleOwner
+            ) { database ->
+                if (database.isNotEmpty()) {
+                    Log.d("RecipesFragment", "readDatabase called")
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
                 } else {
                     requestApiData()
                 }
-            })
+            }
         }
     }
 
     private fun requestApiData() {
-        Log.d("RecipesFragment","requestApiData called")
+        Log.d("RecipesFragment", "requestApiData called")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
-            when(response){
+        mainViewModel.recipesResponse.observe(
+            viewLifecycleOwner
+        ) { response ->
+            when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
                     response.data?.let { mAdapter.setData(it) }
@@ -95,12 +95,12 @@ class RecipesFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                is NetworkResult.Loading ->{
+                is NetworkResult.Loading -> {
                     showShimmerEffect()
                 }
             }
             handleErrorView(response)
-        })
+        }
     }
 
     private fun loadDataFromCache() {
@@ -112,7 +112,6 @@ class RecipesFragment : Fragment() {
             }
         }
     }
-
 
     // testing
 

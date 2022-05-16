@@ -14,12 +14,12 @@ import javax.inject.Inject
 // --(The Repository will inject those two data sources)--
 
 // inject recipes/recipesApi.
-//specify which type you are going to inject (Hilt will basically search for this specific type in this network module, and it will search for a function which returns the same type)
+// specify which type you are going to inject (Hilt will basically search for this specific type in this network module, and it will search for a function which returns the same type)
 class RemoteDataSource @Inject constructor(
     private val foodRecipesApi: FoodRecipesApi
 ) {
-    //We are going to add multiple queries to our get request.
-    suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe>{
+    // We are going to add multiple queries to our get request.
+    suspend fun getRecipes(queries: Map<String, String>): Response<FoodRecipe> {
         return foodRecipesApi.getRecipes(queries)
     }
 }

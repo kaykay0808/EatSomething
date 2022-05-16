@@ -2,7 +2,6 @@ package com.kay.eatsomething.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.kay.eatsomething.util.Constants
 import com.kay.eatsomething.util.Constants.Companion.API_KEY
 import com.kay.eatsomething.util.Constants.Companion.QUERY_ADD_RECIPE_INFORMATION
 import com.kay.eatsomething.util.Constants.Companion.QUERY_API_KEY

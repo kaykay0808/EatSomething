@@ -24,7 +24,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
-): AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     /** ROOM DATABASE */
 
@@ -37,7 +37,7 @@ class MainViewModel @Inject constructor(
         }
 
     /** RETROFIT */
-    //Create some mutable livedata.
+    // Create some mutable livedata.
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     var errorLiveData = MutableLiveData<String?>()
 
@@ -47,19 +47,19 @@ class MainViewModel @Inject constructor(
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         recipesResponse.value = NetworkResult.Loading()
-        if(hasInternedConnection()){
+        if (hasInternedConnection()) {
             try {
                 val response = repository.remote.getRecipes(queries)
                 recipesResponse.value = handleFoodRecipesResponse(response)
 
                 val foodRecipe = recipesResponse.value!!.data
-                if(foodRecipe != null) {
+                if (foodRecipe != null) {
                     offlineCacheRecipes(foodRecipe)
                 }
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 recipesResponse.value = NetworkResult.Error("Recipes not found.")
             }
-        }else{
+        } else {
             recipesResponse.value = NetworkResult.Error("No Internet Connection")
         }
     }
@@ -89,7 +89,6 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-
 
     // Check internet status
     private fun hasInternedConnection(): Boolean {

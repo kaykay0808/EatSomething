@@ -18,10 +18,7 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
     private var recipes = emptyList<FoodTypeResult>()
 
     class MyViewHolder(val binding: RecipesRowLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -44,7 +41,7 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
         // load image from URL
         holder.binding.recipeImageView.load(currentRecipe.image) {
             crossfade(600)
-            error(R.drawable.ic_error_placeholder) //<- If no connection an error picture will load instead.
+            error(R.drawable.ic_error_placeholder) // <- If no connection an error picture will load instead.
         }
 
         // set number of likes(<3)
@@ -76,7 +73,5 @@ class RecipesAdapters : RecyclerView.Adapter<RecipesAdapters.MyViewHolder>() {
             DiffUtil.calculateDiff(recipesDiffUtil) // <- This calculate the difference between those two list.
         recipes = newData.foodTypeResults
         diffUtilResult.dispatchUpdatesTo(this) // refer to this class (RecyclerView adapter)
-
     }
-
 }
